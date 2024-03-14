@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    tty-color (0.6.0)
+    tty-cursor (0.7.1)
+    unicode-display_width (2.4.2)
+    whirly (0.3.0)
+      unicode-display_width (>= 1.1)
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  tty-color
+  tty-cursor
+  whirly
+
+BUNDLED WITH
+   2.4.19
