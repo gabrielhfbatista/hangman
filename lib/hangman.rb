@@ -105,7 +105,7 @@ class Hangman
           if guessed_letters.include?(letter)
             puts "Você já chutou esta letra! Letras chutadas: #{guessed_letters.join(', ').upcase}"
           elsif @word.downcase.include?(letter)
-            puts "Sua palavra contém essa letra '#{letter}'!"
+            puts "Sua palavra contém a letra '#{letter}'!"
             guessed_letters << letter
             underscore_spaces = @word.chars.map { |c| guessed_letters.include?(c.downcase) || c == ' ' ? c : '_' }.join(' ')
             puts ""
@@ -157,7 +157,7 @@ class Hangman
             end
           else
             Initialization.missedLetters(letter, @option)
-            puts "Tu palabra no contiene esta letra '#{letter}'!"
+            puts "Tu palabra no contiene la letra '#{letter}'!"
             guessed_letters << letter
             attempts_left -= 1
             puts ""
