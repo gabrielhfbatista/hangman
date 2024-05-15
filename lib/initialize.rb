@@ -1,6 +1,5 @@
 require 'tty-cursor'
 require 'whirly'
-require 'color-console'
 
 class Initialization
   @@letters = []
@@ -27,11 +26,11 @@ class Initialization
     cursor = TTY::Cursor
     print cursor.move_to(50, 15)
       if option == 1
-        Console.puts "Missed Letters: #{@@letters.join(', ').upcase}", :red
+        puts "Missed Letters: #{@@letters.join(', ').upcase}"
       elsif option == 2
-        Console.puts "Letras erradas: #{@@letters.join(', ').upcase}", :red
+        puts "Letras erradas: #{@@letters.join(', ').upcase}"
       else
-        Console.puts "Letras equivocadas: #{@@letters.join(', ').upcase}", :red
+        puts "Letras equivocadas: #{@@letters.join(', ').upcase}"
       end
     puts ""
 
