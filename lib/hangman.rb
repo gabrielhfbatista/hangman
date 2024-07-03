@@ -42,7 +42,7 @@ class Hangman
       puts ""
       puts ""
     else
-      return puts "Option Invalid! There's no option like that!"
+      return Console.puts "Option Invalid! There's no option like that!", :red
     end
   end
 
@@ -59,25 +59,25 @@ class Hangman
       guessed_letters = []
       attempts_left = 6
       while attempts_left > 0
-        puts "Guess a letter (#{attempts_left} attempts left):"
+        Console.puts "Guess a letter (#{attempts_left} attempts left):", :blue
         letter = gets.chomp.downcase
-        if only_letters?(letter)
+        if only_letters?(letter) && !@word.nil?
           if guessed_letters.include?(letter)
             puts "You already guessed that letter! Guessed letters: #{guessed_letters.join(', ').upcase}"
           elsif @word.downcase.include?(letter)
-            puts "Your word contains the letter '#{letter}'!"
+            Console.puts "Your word contains the letter '#{letter}'!", :green
             guessed_letters << letter
             underscore_spaces = @word.chars.map { |c| guessed_letters.include?(c.downcase) || c == ' ' ? c : '_' }.join(' ')
             puts ""
             puts "                                                #{underscore_spaces}"
             puts ""
             if underscore_spaces.gsub(/\s+/, "") == @word
-              puts "Congratulations, you guessed the word '#{@word}'!"
+              Console.puts "Congratulations, you guessed the word '#{@word}'!", :green
               break
             end
           else
             Initialization.missedLetters(letter, @option)
-            puts "Your word doesn't contain the letter '#{letter}'!"
+            Console.puts "Your word doesn't contain the letter '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
             puts ""
@@ -85,11 +85,11 @@ class Hangman
             puts ""
           end
         else
-          puts "Digite uma letra válida!"
+          Console.puts "Enter a valid word!", :red
         end
       end
       if attempts_left == 0
-        puts "Game over! The word was '#{@word}'."
+        Console.puts "Game over! The word was '#{@word}'.", :red
       end
     elsif @option == 2
       underscore_spaces = Initialization.create_underscore_spaces(@word)
@@ -101,23 +101,23 @@ class Hangman
       while attempts_left > 0
         puts "Chute uma letra (#{attempts_left} tentativas restantes):"
         letter = gets.chomp.downcase
-        if only_letters?(letter)
+        if only_letters?(letter) && !@word.nil?
           if guessed_letters.include?(letter)
             puts "Você já chutou esta letra! Letras chutadas: #{guessed_letters.join(', ').upcase}"
           elsif @word.downcase.include?(letter)
-            puts "Sua palavra contém a letra '#{letter}'!"
+            Console.puts "Sua palavra contém a letra '#{letter}'!", :green
             guessed_letters << letter
             underscore_spaces = @word.chars.map { |c| guessed_letters.include?(c.downcase) || c == ' ' ? c : '_' }.join(' ')
             puts ""
             puts "                                                #{underscore_spaces}"
             puts ""
             if underscore_spaces.gsub(/\s+/, "") == @word.gsub(/\s+/, "")
-              puts "Parabéns, você acertou a palavra, sua palavra era '#{@word}'!"
+              Console.puts "Parabéns, você acertou a palavra, sua palavra era '#{@word}'!", :green
               break
             end
           else
             Initialization.missedLetters(letter, @option)
-            puts "Sua palavra não contém essa letra '#{letter}'!"
+            Console.puts "Sua palavra não contém essa letra '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
             puts ""
@@ -125,11 +125,11 @@ class Hangman
             puts ""
           end
         else
-          puts "Digite uma letra válida!"
+          Console.puts "Digite uma letra válida!", :red
         end
       end
       if attempts_left == 0
-        puts "Fim de jogo! A palavra era '#{@word}'."
+        Console.puts "Fim de jogo! A palavra era '#{@word}'.", :red
       end
     else
       underscore_spaces = Initialization.create_underscore_spaces(@word)
@@ -141,11 +141,11 @@ class Hangman
       while attempts_left > 0
         puts "Escribelo una letra (#{attempts_left} intentos restantes):"
         letter = gets.chomp.downcase
-        if only_letters?(letter)
+        if only_letters?(letter) && !@word.nil?
           if guessed_letters.include?(letter)
             puts "¡Ya escribiste esta letra: #{guessed_letters.join(', ').upcase}"
           elsif @word.downcase.include?(letter)
-            puts "Tu palabra contiene esta letra '#{letter}'!"
+            Console.puts "Tu palabra contiene esta letra '#{letter}'!", :green
             guessed_letters << letter
             underscore_spaces = @word.chars.map { |c| guessed_letters.include?(c.downcase) || c == ' ' ? c : '_' }.join(' ')
             puts ""
@@ -157,7 +157,7 @@ class Hangman
             end
           else
             Initialization.missedLetters(letter, @option)
-            puts "Tu palabra no contiene la letra '#{letter}'!"
+            Console.puts "Tu palabra no contiene la letra '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
             puts ""
@@ -165,11 +165,11 @@ class Hangman
             puts ""
           end
         else
-          puts "Introduzca una letra válida!"
+          Console.puts "Introduzca una letra válida!", :red
         end
       end
       if attempts_left == 0
-        puts "¡Fin del juego! La palabra era '#{@word}'."
+        Console.puts "¡Fin del juego! La palabra era '#{@word}'.", :red
       end
     end
   end
