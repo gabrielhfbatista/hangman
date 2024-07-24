@@ -5,7 +5,7 @@ require 'color-console'
 class Initialization
   @@letters = []
 
-  def self.initializing
+  def self.initialize_game
     system('cls')
     cursor = TTY::Cursor
     print cursor.move_to(50, 15)    
@@ -15,24 +15,24 @@ class Initialization
     end                   
   end
 
-  def self.create_underscore_spaces(word)
+  def self.create_underscores(word)
     word.chars.map { |c| c == ' ' ? ' ' : '_' }.join(' ')
   end
 
-  def self.missedLetters(letter, option)
-    if @@letters.empty? || @@letters.last != letter
-      @@letters << letter
-    end
+  def self.display_missed_letters(letter, option)
+    @@letters << letter unless @@letters.include?(letter)
     system('cls')
     cursor = TTY::Cursor
     print cursor.move_to(50, 15)
-      if option == 1
-        Console.puts "Missed Letters: #{@@letters.join(', ').upcase}", :red
-      elsif option == 2
-        Console.puts "Letras erradas: #{@@letters.join(', ').upcase}", :red
-      else
-        Console.puts "Letras equivocadas: #{@@letters.join(', ').upcase}", :red
-      end
+
+    case option
+    when 1
+      Console.puts "Missed Letters: #{@@letters.join(', ').upcase}", :red
+    when 2
+      Console.puts "Letras erradas: #{@@letters.join(', ').upcase}", :red
+    else
+      Console.puts "Letras equivocadas: #{@@letters.join(', ').upcase}", :red
+    end
     puts ""
 
     hangman_figures = [
@@ -80,8 +80,6 @@ class Initialization
                                                                        |
                                                                ========='
     ]
-    if @@letters.size < hangman_figures.length
-      puts hangman_figures[@@letters.size]
-    end
+    puts hangman_figures[@@letters.size] if @@letters.size < hangman_figures.length
   end
 end

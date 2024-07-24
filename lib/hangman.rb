@@ -8,7 +8,7 @@ class Hangman
   attr_reader :option
 
   def initialize
-    Initialization.initializing
+    Initialization.initialize_game
     language = <<-LANGUAGE
       Select a language! 
 
@@ -52,7 +52,7 @@ class Hangman
 
   def play
     if @option == 1
-      underscore_spaces = Initialization.create_underscore_spaces(@word)
+      underscore_spaces = Initialization.create_underscores(@word)
       puts ""
       puts "                                                        #{underscore_spaces}"
       puts ""
@@ -76,7 +76,7 @@ class Hangman
               break
             end
           else
-            Initialization.missedLetters(letter, @option)
+            Initialization.display_missed_letters(letter, @option)
             Console.puts "Your word doesn't contain the letter '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
@@ -92,7 +92,7 @@ class Hangman
         Console.puts "Game over! The word was '#{@word}'.", :red
       end
     elsif @option == 2
-      underscore_spaces = Initialization.create_underscore_spaces(@word)
+      underscore_spaces = Initialization.create_underscores(@word)
       puts ""
       puts "                                                      #{underscore_spaces}"
       puts ""
@@ -116,7 +116,7 @@ class Hangman
               break
             end
           else
-            Initialization.missedLetters(letter, @option)
+            Initialization.display_missed_letters(letter, @option)
             Console.puts "Sua palavra não contém essa letra '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
@@ -132,7 +132,7 @@ class Hangman
         Console.puts "Fim de jogo! A palavra era '#{@word}'.", :red
       end
     else
-      underscore_spaces = Initialization.create_underscore_spaces(@word)
+      underscore_spaces = Initialization.create_underscores(@word)
       puts ""
       puts "                                                      #{underscore_spaces}"
       puts ""
@@ -156,7 +156,7 @@ class Hangman
               break
             end
           else
-            Initialization.missedLetters(letter, @option)
+            Initialization.display_missed_letters(letter, @option)
             Console.puts "Tu palabra no contiene la letra '#{letter}'!", :red
             guessed_letters << letter
             attempts_left -= 1
